@@ -1,0 +1,9 @@
+/node_modules
+Homestead.yaml
+Homestead.json
+.env
+/composer
+/storage/app
+/storage/framework
+/storage/logs
+/vendor/**/.git
