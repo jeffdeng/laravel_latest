@@ -42,6 +42,14 @@ $api->version('v1', function ($api) {
 	$api->post('users/register', 'Api\V1\UserController@register');
 });
 			
+
+///
+
+$api->version('v1', ['middleware' => 'api.auth'], function ($api) {
+	$api->get('user', ['scopes' => 'read_user_data', function () {
+		// Only access tokens with the "read_user_data" scope will be given access.
+	}]);
+});
 //中间件加参数模式
 // Route::put('post/{id}', ['middleware' => 'role:editor,delete', function ($id) {
 
