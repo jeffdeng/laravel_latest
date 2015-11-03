@@ -149,6 +149,7 @@ return [
     		 * non-system  Providers...
     	    */
     		Intervention\Image\ImageServiceProvider::class,
+    		Dingo\Api\Provider\LaravelServiceProvider::class
     		
     ],
 
@@ -203,6 +204,7 @@ return [
     		 * non-system  Providers...
     		 */
     		'Image'     => Intervention\Image\Facades\Image::class,
+    		'Api'     => Dingo\Api\Facade\API::class,
 
     ],
 
