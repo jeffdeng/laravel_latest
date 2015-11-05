@@ -149,8 +149,9 @@ return [
     		 * non-system  Providers...
     	    */
     		Intervention\Image\ImageServiceProvider::class,
-    		Dingo\Api\Provider\LaravelServiceProvider::class
-    		
+    		Dingo\Api\Provider\LaravelServiceProvider::class,
+    		LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider::class,
+    		LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider::class,
     ],
 
     /*
@@ -205,6 +206,7 @@ return [
     		 */
     		'Image'     => Intervention\Image\Facades\Image::class,
     		'Api'     => Dingo\Api\Facade\API::class,
+    		'Authorizer' => LucaDegasperi\OAuth2Server\Facades\Authorizer::class,
 
     ],
 

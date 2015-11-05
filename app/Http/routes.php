@@ -11,34 +11,34 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/home', ['as' => 'h','uses' => 'HomeController@index']);//'middleware' => 'auth',
-Route::get('/mail/{id}',  'HomeController@sendReminderEmail');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+// Route::get('/home', ['as' => 'h','uses' => 'HomeController@index']);//'middleware' => 'auth',
+// Route::get('/mail/{id}',  'HomeController@sendReminderEmail');
 
-Route::controllers([  
-    'auth' => 'Auth\AuthController',
-    'password' => 'Auth\PasswordController',
-]);
+// Route::controllers([  
+//     'auth' => 'Auth\AuthController',
+//     'password' => 'Auth\PasswordController',
+// ]);
 
-Route::post('oauth/access_token', function() {
-	return Response::json(Authorizer::issueAccessToken());
-});
+// Route::post('oauth/access_token', function() {
+// 	return Response::json(Authorizer::issueAccessToken());
+// });
 
-Route::get('test', ['middleware' => 'oauth', function() {
-	//    echo "oauth 认证成功 user id: " . Authorizer::getResourceOwnerId();
-	echo App\User::find(Authorizer::getResourceOwnerId());
-}]);
+// Route::get('test', ['middleware' => 'oauth', function() {
+// 	//    echo "oauth 认证成功 user id: " . Authorizer::getResourceOwnerId();
+// 	echo App\User::find(Authorizer::getResourceOwnerId());
+// }]);
 
-Route::get('test2', function() {
-		//    echo "oauth 认证成功 user id: " . Authorizer::getResourceOwnerId();
-		echo Request::header('Authorization');
-});
+// Route::get('test2', function() {
+// 		//    echo "oauth 认证成功 user id: " . Authorizer::getResourceOwnerId();
+// 		echo Request::header('Authorization');
+// });
 
 $api = app('api.router');
-$api->version('v1', function ($api) {
-	$api->get('users/{id}',['middleware' => 'oauth'], 'Api\V1\UserController@show');
+ $api->version('v1', function ($api) {
+	$api->get('users/{id}',['middleware' => 'api.auth'], 'Api\V1\UserController@show');
 	$api->post('users/register', 'Api\V1\UserController@register');
 });
 			
