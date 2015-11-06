@@ -154,11 +154,23 @@ return [
     |
     */
 
-    'auth' => [
-		'Dingo\Api\Auth\Provider\OAuth2'
-		//'oauth'
-    ],
-
+//     'auth' => [
+// 		'Dingo\Api\Auth\Provider\OAuth2'
+//     ],
+	'oauth' => function ($app) {
+		$provider = new Dingo\Api\Auth\Provider\OAuth2($app['oauth2-server.authorizer']->getChecker());
+		
+		$provider->setUserResolver(function ($id) {
+			 return User::findOrFail($id);
+			// Logic to return a user by their ID.
+		});
+		
+		$provider->setClientResolver(function ($id) {
+			// Logic to return a client by their ID.
+		});
+	
+		return $provider;
+	},
     /*
     |--------------------------------------------------------------------------
     | Throttling / Rate Limiting
